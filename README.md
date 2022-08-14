@@ -1,3 +1,11 @@
+1. changed double click to single click for better UX
+2. load customer reservation data by SearchBarService when searching customers
+3. main page - search page doesn't load any data
+4. clear button works for refresh page, init search params
+
+
+
+
 # HSS
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.1.1.

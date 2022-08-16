@@ -2,7 +2,6 @@ import { DebugElement } from '@angular/core';
 import { ComponentFixture, TestBed,fakeAsync,tick,waitForAsync } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { SearchBarComponent, SearchParam } from './search-bar.component';
-import { SearchBarService } from './search-bar.service';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { MatDialogModule, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { HttpClient } from '@angular/common/http';
@@ -10,7 +9,6 @@ import { HttpClient } from '@angular/common/http';
 
 describe('SearchBarComponent', () => {
     let searchBarComponent: SearchBarComponent;
-    let searchBarService: SearchBarService;
     const testResultData = {
         "stay": {
           "arrivalDate": "2021-11-18T05:00:00.000Z",
@@ -63,14 +61,13 @@ describe('SearchBarComponent', () => {
             SearchBarComponent
         ],
         providers: [
-            SearchBarService,
             { provide: [MAT_DIALOG_DATA,HttpClient] },
           ],
         }).compileComponents();
     });
 
 
-    it('should create the app', () => {
+    it('should create the SearchBarComponent', () => {
         expect(SearchBarComponent).toBeTruthy();
     });
     

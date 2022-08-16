@@ -23,6 +23,7 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatButtonModule} from '@angular/material/button';
 import { SearchBarService } from './search-bar/search-bar.service';
+import {MatTableModule} from '@angular/material/table';
 
 @NgModule({
   declarations: [
@@ -49,7 +50,8 @@ import { SearchBarService } from './search-bar/search-bar.service';
     MatSlideToggleModule,
     MatCheckboxModule,
     MatAutocompleteModule,
-    MatButtonModule
+    MatButtonModule,
+    MatTableModule
     
   ],
   providers: [SearchBarService],

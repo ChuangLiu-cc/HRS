@@ -1,10 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import {MatDialog} from '@angular/material/dialog';
 import { ReservationFormComponent } from '../reservation-form/reservation-form.component';
 import { RoomSize } from '../reservation-form/reservation-form.component';
-import { SearchBarService } from './search-bar.service';
-
+import { DataLoaderService } from '../data-loader/data-loader.service';
 
 export interface SearchParam{
     name: string;
@@ -22,7 +21,8 @@ export interface SearchParam{
     styleUrls:['./search-bar.component.css']
 })
 
-export class SearchBarComponent {
+export class SearchBarComponent implements OnInit {
+    displayedColumns: string[] = ['name', 'phone', 'email', 'note'];
     searchBar = new FormControl('');
     public reservations: any;
     public searchResults: any;
@@ -31,32 +31,34 @@ export class SearchBarComponent {
         {value: 'business-suite', viewValue: 'Business Suite'},
         {value: 'presidential-suite', viewValue: 'Presidential Suite'}
     ];
-    constructor(private searchBarService : SearchBarService ,private dialog: MatDialog) { };
+    constructor(private dataLoaderService : DataLoaderService ,private dialog: MatDialog) { };
     searchParam: SearchParam = { name:"", arrival: "", departure:"", email:"", phone: "", room: "", note:""};
     previousSearchParam: SearchParam = { name:"", arrival:"", departure:"", email:"", phone: "", room: "", note:""};
+    ngOnInit() {
+        //load data from json when loading page
+        this.dataLoaderService.getJSON().subscribe(data=>{
+            this.reservations = data;
+        })
+    }
     public searchCustomers(searchParam: SearchParam): void{
         if(!searchParam.name && !searchParam.arrival && !searchParam.departure && !searchParam.email && !searchParam.phone && !searchParam.room && !searchParam.note) return;
         //check previous search param
         if(JSON.stringify(this.previousSearchParam) === JSON.stringify(searchParam)) return;
-
-        this.searchBarService.getJSON().subscribe(data=>{
-            this.reservations = data;
-            //filter data by searchParam
-            this.searchResults = this.reservations.filter((r:any)=> {
-                return searchParam.name ? (this.isStringInclude(r.firstName,searchParam.name) || this.isStringInclude(r.lastName, searchParam.name)) : true &&  
-                searchParam.arrival ? this.isDateEqual(r.stay.arrivalDate, searchParam.arrival||"") : true &&
-                searchParam.departure ? this.isDateEqual(r.stay.departureDate, searchParam.departure||"") : true &&
-                searchParam.email ? this.isStringInclude(r.email, searchParam.email||"") : true &&
-                searchParam.phone ? this.isStringInclude(r.phone, searchParam.phone||"") : true &&
-                searchParam.room ? this.isStringInclude(r.room.roomSize, searchParam.room||"") : true &&
-                searchParam.note ? this.isStringInclude(r.note, searchParam.note||"") : true
-            });
-            this.previousSearchParam =  JSON.parse(JSON.stringify(searchParam));
-            if(this.searchResults.length == 0)
-                this.noSearchResults = true;
-            else
-                this.noSearchResults = false;
-        })
+        //filter data by searchParam
+        this.searchResults = this.reservations.filter((r:any)=> {
+            return (searchParam.name ? (this.isStringInclude(r.firstName,searchParam.name) || this.isStringInclude(r.lastName, searchParam.name)) : true) &&  
+            (searchParam.arrival ? this.isDateEqual(r.stay.arrivalDate, searchParam.arrival) : true) &&
+            (searchParam.departure ? this.isDateEqual(r.stay.departureDate, searchParam.departure) : true) &&
+            (searchParam.email ? this.isStringInclude(r.email, searchParam.email) : true) &&
+            (searchParam.phone ? this.isStringInclude(r.phone, searchParam.phone) : true) &&
+            (searchParam.room ? this.isStringInclude(r.room.roomSize, searchParam.room) : true) &&
+            (searchParam.note ? this.isStringInclude(r.note, searchParam.note) : true)
+        });
+        this.previousSearchParam =  JSON.parse(JSON.stringify(searchParam));
+        if(this.searchResults.length == 0)
+            this.noSearchResults = true;
+        else
+            this.noSearchResults = false;
     }
     public clearSearchParam(): void{
         this.initSearchParam();

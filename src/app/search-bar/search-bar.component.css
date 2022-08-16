@@ -2,7 +2,7 @@
     justify-content: center;
     /*align-items: center;*/
     margin: auto;
-    margin-top: 200px;
+    margin-top: 100px;
     background-color:rgb(238, 238, 238);
     width: 1000px;
     /* height: 400px; */
@@ -58,6 +58,16 @@ input {
 }
 .warning-msg {
     color: red;
+}
+table {
+    width: 100%;
+}
+.results-container {
+    padding-top: 30px;
+    
+}
+.clickable-customer-info{
+    cursor: pointer;
 }
 /* ::ng-deep input.mat-input-element {
     color: white;

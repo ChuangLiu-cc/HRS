@@ -1,7 +1,7 @@
 1. changed double click to single click for better UX
-2. load customer reservation data by SearchBarService when searching customers
-3. main page - search page doesn't load any data
-4. clear button works for refresh page, init search params
+2. load customer reservation data tp memory by dataloader service
+3. main page - search page, result will show page below: result table or warning msg
+4. clear button works for init search page UI
 
 
 

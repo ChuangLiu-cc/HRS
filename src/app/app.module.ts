@@ -22,14 +22,15 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatButtonModule} from '@angular/material/button';
-import { SearchBarService } from './search-bar/search-bar.service';
 import {MatTableModule} from '@angular/material/table';
+import { ResultListComponent } from './result-list/result-list.compoent';
 
 @NgModule({
   declarations: [
     AppComponent,
     ReservationFormComponent,
     SearchBarComponent,
+    ResultListComponent
   ],
   imports: [
     BrowserModule,
@@ -54,7 +55,7 @@ import {MatTableModule} from '@angular/material/table';
     MatTableModule
     
   ],
-  providers: [SearchBarService],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

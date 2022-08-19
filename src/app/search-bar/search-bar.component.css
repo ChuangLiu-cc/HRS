@@ -52,23 +52,8 @@ input {
     width: 100%;
     display: inline-block;
 }
-.search-result-list{
-    cursor: pointer;
-    color: rgb(54, 140, 238);
-}
-.warning-msg {
-    color: red;
-}
-table {
-    width: 100%;
-}
-.results-container {
-    padding-top: 30px;
-    
-}
-.clickable-customer-info{
-    cursor: pointer;
-}
+
+
 /* ::ng-deep input.mat-input-element {
     color: white;
   }

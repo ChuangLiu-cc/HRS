@@ -22,7 +22,7 @@ export interface SearchParam{
 })
 
 export class SearchBarComponent implements OnInit {
-    displayedColumns: string[] = ['name', 'phone', 'email', 'note'];
+    
     searchBar = new FormControl('');
     public reservations: any;
     public searchResults: any;
@@ -83,14 +83,14 @@ export class SearchBarComponent implements OnInit {
         }
         return false;
     }
-    public popReservationDialog(searchResults: any): void {
-        //popup reservation 
-        const dialogRef = this.dialog.open(ReservationFormComponent, {
-            width: '1200px',
-            data: searchResults||null,
-        });
+    // public popReservationDialog(searchResults: any): void {
+    //     //popup reservation 
+    //     const dialogRef = this.dialog.open(ReservationFormComponent, {
+    //         width: '1200px',
+    //         data: searchResults||null,
+    //     });
       
-        dialogRef.afterClosed().subscribe(result => {
-        });
-    }
+    //     dialogRef.afterClosed().subscribe(result => {
+    //     });
+    // }
 }
